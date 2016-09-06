@@ -1,0 +1,55 @@
+{
+  "name": "3a.rsem-1.2.31-indexer",
+  "title": "RSEM 1.2.31 Indexer",
+  "dxapi": "1.0.0",
+  "inputSpec": [
+    {
+      "patterns": [
+        "*.fa.gz",
+        "*.fasta.gz"
+      ],
+      "label": "Genome",
+      "help": "A file, in gzipped FASTA format, with the reference genome sequence to be indexed.",
+      "name": "genome_fastagz",
+      "class": "file"
+    },
+    {
+      "patterns": [
+        "*.gtf"
+      ],
+      "label": "Genes",
+      "help": "A file, in GTF format, containing the reference gene annotations.",
+      "name": "genes_gtf",
+      "class": "file"
+    },
+    {
+      "group": "Advanced",
+      "help": "Extra command line options that will be supplied directly to the RSEM execution.",
+      "default": "--bowtie",
+      "label": "Extra command line options",
+      "optional": true,
+      "class": "string",
+      "name": "extra_options"
+    }
+  ],
+  "outputSpec": [
+    {
+      "patterns": [
+        "*.rsem-index.tar"
+      ],
+      "label": "RSEM genome/transcriptome index",
+      "help": "A tar archive with the reference genome/transcriptome prepared for RSEM.",
+      "name": "index_tar",
+      "class": "file"
+    }
+  ],
+  "runSpec": {
+    "systemRequirements": {
+      "main": {
+        "instanceType": "mem1_ssd1_x8"
+      }
+    },
+    "file": "src/code.sh",
+    "interpreter": "bash"
+  }
+}

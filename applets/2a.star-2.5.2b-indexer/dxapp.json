@@ -1,0 +1,65 @@
+{
+  "name": "2a.star-2.5.2b-indexer",
+  "title": "STAR 2.5.2b Indexer",
+  "summary": "Indexes a reference genome (with optional transcriptome) for use with the STAR Aligner",
+  "dxapi": "1.0.0",
+  "inputSpec": [
+    {
+      "patterns": [
+        "*.fa.gz",
+        "*.fasta.gz"
+      ],
+      "label": "Genome",
+      "help": "A file, in gzipped FASTA format, with the reference genome sequence to be indexed.",
+      "name": "genome_fastagz",
+      "class": "file"
+    },
+    {
+      "help": "(Optional) A file, in GTF format, containing the reference gene annotations.",
+      "label": "Genes",
+      "patterns": [
+        "*.gtf"
+      ],
+      "optional": true,
+      "class": "file",
+      "name": "genes_gtf"
+    },
+    {
+      "group": "Advanced",
+      "help": "Extra command line options that will be supplied directly to the STAR execution.",
+      "label": "Extra command line options",
+      "optional": true,
+      "class": "string",
+      "name": "extra_options"
+    },
+    {
+      "group": "Advanced",
+      "help": "The amount of bases to concatenate from donor and acceptor sides of the junctions. It is recommended to be equal to the maximum read length.",
+      "default": 100,
+      "label": "Maximum possible read overhang (maximum read length)",
+      "optional": false,
+      "class": "int",
+      "name": "overhang"
+    }
+  ],
+  "outputSpec": [
+    {
+      "patterns": [
+        "*.star-index.tar"
+      ],
+      "label": "STAR genome/transcriptome index",
+      "help": "A tar archive with the reference genome/transcriptome indexed with STAR.",
+      "name": "index_tar",
+      "class": "file"
+    }
+  ],
+  "runSpec": {
+    "systemRequirements": {
+      "main": {
+        "instanceType": "mem3_ssd1_x8"
+      }
+    },
+    "file": "src/code.sh",
+    "interpreter": "bash"
+  }
+}

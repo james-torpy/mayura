@@ -1,0 +1,61 @@
+{
+  "name": "2b.star-2.5.2b-align-with-bam-log-output-non-paired-50bp",
+  "title": "STAR 2.5.2b Aligner with bam and log output non-paired 50bp",
+  "dxapi": "1.0.0",
+  "inputSpec": [
+    {
+      "name": "reads",
+      "label": "Reads",
+      "help": "A file, in gzipped FASTQ format, with the first read mates to be mapped.",
+      "class": "file",
+      "patterns": ["*.fq.gz", "*.fastq.gz"]
+    },
+    {
+      "name": "reads2",
+      "label": "Reads (second mates)",
+      "help": "A file, in gzipped FASTQ format, with the second read mates to be mapped.",
+      "class": "file",
+      "patterns": ["*.fq.gz", "*.fastq.gz"]
+    },
+    {
+      "name": "genomeindex",
+      "label": "Genome index",
+      "help": "A tarball with the indexed genome to map against.",
+      "class": "file",
+      "patterns": ["*.star-index.tar"]
+    },
+    {
+      "name": "sample_name",
+      "label": "Sample name",
+      "help": "(Optional) A string, without spaces, that will be used to name the output BAM file. If not provided, the output file will be named after the input reads file.",
+      "class": "string",
+      "optional": true
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "transcriptome",
+      "class": "file",
+      "patterns": ["*.bam"]
+    },
+    {
+      "name": "genome",
+      "class": "file",
+      "patterns": ["*.bam"]
+    },
+    {
+      "name": "logs",
+      "class": "file",
+      "patterns": ["*.log"]
+    }
+  ],
+  "runSpec": {
+    "systemRequirements": {
+      "main": {
+        "instanceType": "mem3_ssd1_x8"
+      }
+    },
+    "file": "src/code.sh",
+    "interpreter": "bash"
+  }
+}

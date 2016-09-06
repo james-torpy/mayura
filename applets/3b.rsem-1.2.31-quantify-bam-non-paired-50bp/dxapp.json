@@ -1,0 +1,38 @@
+{
+  "name": "3b.rsem-1.2.31-quantify-bam-non-paired-50bp",
+  "title": "RSEM Quantify bam 1.2.31 non-paired 50bp",
+  "dxapi": "1.0.0",
+  "inputSpec": [
+    {
+      "patterns": [
+        "*.bam"
+      ],
+      "label": "Name-sorted transcriptome mappings",
+      "name": "name_sorted_bam",
+      "class": "file"
+    },
+    {
+      "patterns": [
+        "*.rsem-index.tar"
+      ],
+      "label": "Genome index",
+      "name": "genomeindex",
+      "class": "file"
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "results",
+      "class": "array:file"
+    }
+  ],
+  "runSpec": {
+    "systemRequirements": {
+      "main": {
+        "instanceType": "mem1_ssd1_x8"
+      }
+    },
+    "file": "src/code.sh",
+    "interpreter": "bash"
+  }
+}
