@@ -1,0 +1,59 @@
+{
+  "name": "1.trim-galore-0.4.1",
+  "title": "Trim Galore 0.4.1",
+  "dxapi": "1.0.0",
+  "inputSpec": [
+    {
+      "name": "reads",
+      "label": "Reads",
+      "help": "A file, in gzipped FASTQ format, with the reads to be trimmed.",
+      "class": "file",
+      "patterns": ["*.fq.gz", "*.fastq.gz"]
+    },
+    {
+      "name": "sample_name",
+      "label": "Sample name",
+      "help": "(Optional) A string, without spaces, that will be used as prefix for the trimmed fastq files. If not provided, the output file will be named after the input reads file.",
+      "class": "string",
+      "optional": true
+    },
+    {
+      "name": "extra_options",
+      "label": "Extra command line options",
+      "help": "Extra command line options that will be supplied directly to the trim_galore execution.",
+      "class": "string",
+      "optional": true,
+      "default": "--fastqc --length 16",
+      "group": "Advanced"
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "reads",
+      "label": "Trimmed Reads",
+      "help": "A file, in gzipped FASTQ format, with the trimmed reads.",
+      "class": "file",
+      "patterns": ["*.fq.gz", "*.fastq.gz"]
+    },
+    {
+      "name": "others",
+      "label": "Other results",
+      "help": "Other resulting files from the trim_galore execution (including FastQC stats, and trimming reports).",
+      "class": "array:file"
+    }
+  ],
+  "runSpec": {
+    "execDepends": [
+      {
+        "name": "openjdk-7-jre-headless"
+      }
+    ],
+    "systemRequirements": {
+      "main": {
+        "instanceType": "mem1_ssd1_x4"
+      }
+    },
+    "file": "src/code.sh",
+    "interpreter": "bash"
+  }
+}

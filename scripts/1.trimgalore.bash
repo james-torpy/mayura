@@ -51,7 +51,7 @@ for inFile in ${files[@]} ;do
 	echo -e
 
 #submit the job to the cluster:
-	qsub -N TRIMGALORE_$uniqueID -wd $logDir -b y -j y -R y -pe smp 1 -V $trimgalore_line
+	#qsub -N TRIMGALORE_$uniqueID -wd $logDir -b y -j y -R y -pe smp 1 -V $trimgalore_line
 
 	j=$(($j+2))
 

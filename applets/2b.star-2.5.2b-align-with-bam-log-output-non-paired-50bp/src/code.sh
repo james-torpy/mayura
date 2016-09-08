@@ -16,7 +16,7 @@ mkdir ./genomeIndex
 dx cat "$genomeindex" | tar xvf - -C ./genomeIndex
 
 STAR --runMode alignReads \
-     --genomeDir $genomeDir \
+     --genomeDir ./genomeIndex/ \
      --readFilesCommand zcat \
      --outFilterType BySJout \
      --outSAMattributes NH HI AS NM MD \
@@ -27,9 +27,8 @@ STAR --runMode alignReads \
      --alignIntronMax 1500000 \
      --alignSJoverhangMin 6 \
      --alignSJDBoverhangMin 1 \
-     --readFilesIn $inFile \
-     --outFileNamePrefix $outDir \
-     --runThreadN $numcores \
+     --readFilesIn ./in/reads/* \
+     --runThreadN `nproc`  \
      --quantMode TranscriptomeSAM \
      --outFilterMatchNmin 45 \
      --outSAMtype BAM SortedByCoordinate \
@@ -46,16 +45,12 @@ if [ "$sample_name" != "" ]; then
   name="$sample_name"
 fi
 
-#To do
-#1. Sort out the samtools and novosort
-samtools view -f 3 -u Aligned.toTranscriptome.out.bam | novosort -n -m 16G -o output.bam -
 mkdir -p ~/out/transcriptome/star
-mkdir -p ~/out/genome/genome
-mkdir -p ~/out/bigwigs/bigwigs
+mkdir -p ~/out/genome/star
 mkdir -p ~/out/logs/logs
 
-mv output.bam ~/out/transcriptome/star/"$name".transcriptome.bam
-mv Aligned.sortedByCoord.out.bam ~/out/genome/genome/"$name".genome.sorted.bam
-mv Log.final.out ~/out/logs/logs/"$name".log
+mv Aligned.toTranscriptome.out.bam ~/out/transcriptome/star/"$name".transcriptome.bam
+mv Aligned.sortedByCoord.out.bam ~/out/genome/star/"$name".genome.sorted.bam
+mv Log.final.out ~/out/logs/"$name".log
 
 dx-upload-all-outputs

@@ -11,13 +11,6 @@
       "patterns": ["*.fq.gz", "*.fastq.gz"]
     },
     {
-      "name": "reads2",
-      "label": "Reads (second mates)",
-      "help": "A file, in gzipped FASTQ format, with the second read mates to be mapped.",
-      "class": "file",
-      "patterns": ["*.fq.gz", "*.fastq.gz"]
-    },
-    {
       "name": "genomeindex",
       "label": "Genome index",
       "help": "A tarball with the indexed genome to map against.",
